@@ -6,6 +6,8 @@
 #include <map>
 #include <string>
 #include <sstream>
+#include <filesystem>
+#include <boost/dll/runtime_symbol_info.hpp>
 
 using std::cout;
 using std::cerr;
@@ -324,8 +326,9 @@ int main( int argc, char *argv[] )
         return 0;
     }
 
+    const auto comp_id_path = boost::dll::program_location().parent_path() / "comp_id.txt";
     StrMap descriptions;
-    loadDescriptions( "comp_id.txt", descriptions );
+    loadDescriptions( comp_id_path.c_str(), descriptions );
 
     for( int i = 1; i < argc; ++i )
     {
